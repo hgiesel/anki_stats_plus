@@ -47,6 +47,13 @@ def get_graph(name: str) -> Optional[Graph]:
     return graph
 
 
+def get_display_name(name: str) -> Optional[str]:
+    if graph := get_graph(name):
+        return graph.display_name
+
+    return None
+
+
 def update_graphs(graphs: List[Tuple[str, bool]]) -> List[Tuple[str, bool]]:
     available_graphs = anki_graphs
 
