@@ -19,5 +19,9 @@ class Settings(QDialog):
         self.ui.deckOverview.setupUi(graphs_overview)
 
     def accept(self):
-        self.cb([], [])
+        self.cb(
+            self.ui.deckBrowser.exportData(),
+            self.ui.deckOverview.exportData(),
+        )
+
         super().accept()

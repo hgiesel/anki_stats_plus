@@ -21,9 +21,6 @@ def show_settings():
     addons = dialogs._dialogs['AddonsDialog'][1]
     dialog = Settings(addons, set_settings)
 
-    graphs_deckbrowser.remove()
-    graphs_overview.remove()
-
     dialog.setupUi(
         update_graphs(graphs_deckbrowser.value),
         update_graphs(graphs_overview.value),
