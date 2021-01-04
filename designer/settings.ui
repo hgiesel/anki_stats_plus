@@ -19,7 +19,7 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="deckbrowser_tab">
       <attribute name="title">
        <string>Deck Browser</string>
       </attribute>
@@ -29,13 +29,23 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2">
+     <widget class="QWidget" name="overview_tab">
       <attribute name="title">
        <string>Deck Overview</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="GraphList" name="deckOverview" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="congrats_tab">
+      <attribute name="title">
+       <string>Congrats Page</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="GraphList" name="congratsPage" native="true"/>
        </item>
       </layout>
      </widget>

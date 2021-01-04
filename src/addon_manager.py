@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List, Tuple
 
 from aqt import mw, dialogs
 from aqt.addons import AddonsDialog
@@ -6,21 +6,24 @@ from aqt.gui_hooks import profile_did_open
 
 from ..gui.settings import Settings
 
-from .utils import graphs_deckbrowser, graphs_overview
+from .utils import graphs_deckbrowser, graphs_overview, graphs_congrats
 from .graphs import update_graphs
 
 
 def update_graphs_data():
     graphs_deckbrowser.value = update_graphs(graphs_deckbrowser.value)
     graphs_overview.value = update_graphs(graphs_overview.value)
+    graphs_congrats.value = update_graphs(graphs_congrats.value)
 
 
 def set_settings(
-    new_graphs_deckbrowser,
-    new_graphs_overview,
+    new_graphs_deckbrowser: List[Tuple[str, bool]],
+    new_graphs_overview: List[Tuple[str, bool]],
+    new_graphs_congrats: List[Tuple[str, bool]],
 ):
     graphs_deckbrowser.value = new_graphs_deckbrowser
     graphs_overview.value = new_graphs_overview
+    graphs_congrats.value = new_graphs_congrats
 
 
 def show_settings():
@@ -30,6 +33,7 @@ def show_settings():
     dialog.setupUi(
         graphs_deckbrowser.value,
         graphs_overview.value,
+        graphs_congrats.value,
     )
     return dialog.open()
 

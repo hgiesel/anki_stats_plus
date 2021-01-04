@@ -47,8 +47,11 @@ default_graphs = [
 ]
 
 
+# I actually save List[List[str, bool]], however Python will not allow this type
+# and I do not want to save JSON-incompatible types
 graphs_deckbrowser = ProfileConfig("statsPlusGraphsDeckbrowser", default_graphs)
 graphs_overview = ProfileConfig("statsPlusGraphsOverview", default_graphs)
+graphs_congrats = ProfileConfig("statsPlusGraphsCongrats", default_graphs)
 
 
 def get_active_graphs(graphs: List[str]) -> List[str]:
@@ -64,3 +67,7 @@ def get_active_deckbrowser_graphs() -> List[str]:
 
 def get_active_overview_graphs() -> List[str]:
     return get_active_graphs(graphs_overview.value)
+
+
+def get_active_congrats_graphs() -> List[str]:
+    return get_active_graphs(graphs_congrats.value)

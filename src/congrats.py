@@ -3,6 +3,8 @@ from os.path import basename
 from aqt.webview import AnkiWebView
 from aqt.gui_hooks import webview_did_inject_style_into_page
 
+from .utils import make_graph_js, get_active_congrats_graphs
+
 
 def add_graphs_to_congrats(webview: AnkiWebView):
     page = basename(webview.page().url().path())
