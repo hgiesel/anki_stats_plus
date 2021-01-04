@@ -2,10 +2,11 @@ from typing import List, Any
 
 from aqt import mw
 
+from .graphs import get_library
+
 
 def make_graph_js(graphs: List[str], query: str = "") -> str:
-    qualified_graphs = [f"anki.{str(graph)}" for graph in graphs]
-    graph_string = ",\n".join(qualified_graphs)
+    graph_string = ",\n".join(graphs)
 
     return f"""
 anki.graphs(document.getElementById("graphsSection"), [
@@ -48,3 +49,18 @@ default_graphs = [
 
 graphs_deckbrowser = ProfileConfig("statsPlusGraphsDeckbrowser", default_graphs)
 graphs_overview = ProfileConfig("statsPlusGraphsOverview", default_graphs)
+
+
+def get_active_graphs(graphs: List[str]) -> List[str]:
+    active_graphs = [graph[0] for graph in graphs if graph[1]]
+    qualified_graphs = [f"{get_library(graph)}.{graph}" for graph in active_graphs]
+
+    return qualified_graphs
+
+
+def get_active_deckbrowser_graphs() -> List[str]:
+    return get_active_graphs(graphs_deckbrowser.value)
+
+
+def get_active_overview_graphs() -> List[str]:
+    return get_active_graphs(graphs_overview.value)

@@ -1,10 +1,10 @@
 from aqt.gui_hooks import overview_will_render_content
 
-from .utils import make_graph_js
+from .utils import make_graph_js, get_active_overview_graphs
 
 
 def add_graphs_to_overview(self, content):
-    graph_js = make_graph_js(["CalendarGraph", "CardCounts"], "deck:current")
+    graph_js = make_graph_js(get_active_overview_graphs(), "deck:current")
 
     content.table += '<div id="graphsSection"></div>' f"<script>{graph_js}</script>"
 

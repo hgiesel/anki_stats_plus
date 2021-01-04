@@ -14,7 +14,11 @@ class Settings(QDialog):
 
         self.cb = callback
 
-    def setupUi(self, graphs_deckbrowser: List[Tuple[str, bool]], graphs_overview: List[Tuple[str, bool]]):
+    def setupUi(
+        self,
+        graphs_deckbrowser: List[Tuple[str, bool]],
+        graphs_overview: List[Tuple[str, bool]],
+    ):
         self.ui.deckBrowser.setupUi(graphs_deckbrowser)
         self.ui.deckOverview.setupUi(graphs_overview)
 
