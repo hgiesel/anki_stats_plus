@@ -5,6 +5,15 @@ from aqt import mw
 from .graphs import get_library
 
 
+def make_graph_css() -> str:
+    return f"""
+const graphsStyle = document.createElement("link");
+graphsStyle.rel = "stylesheet"
+graphsStyle.href = "graphs.css"
+document.head.appendChild(graphsStyle)
+"""
+
+
 def make_graph_js(graphs: List[str], query: str = "") -> str:
     graph_string = ",\n".join(graphs)
 

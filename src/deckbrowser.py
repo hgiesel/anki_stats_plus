@@ -6,7 +6,12 @@ from .utils import make_graph_js, get_active_deckbrowser_graphs
 def add_graphs_to_deckbrowser(self, content):
     graph_js = make_graph_js(get_active_deckbrowser_graphs())
 
-    content.stats += '<div id="graphsSection"></div>' f"<script>{graph_js}</script>"
+    content.stats += f"""
+<div id="graphsSection"></div>
+<script>
+{graph_js}
+</script>
+"""
 
 
 def init_deckbrowser():
