@@ -1,6 +1,11 @@
-from aqt.gui_hooks import deck_browser_will_render_content
+from typing import Any
 
-from .utils import make_graph_js, get_active_deckbrowser_graphs
+from anki.hooks import wrap
+
+from aqt.gui_hooks import deck_browser_will_render_content
+from aqt.deckbrowser import DeckBrowser
+
+from .utils import make_graph_js, get_active_deckbrowser_graphs, add_browser_search_link
 
 
 def add_graphs_to_deckbrowser(self, content):
@@ -14,5 +19,7 @@ def add_graphs_to_deckbrowser(self, content):
 """
 
 
+
 def init_deckbrowser():
     deck_browser_will_render_content.append(add_graphs_to_deckbrowser)
+    DeckBrowser._linkHandler = wrap(DeckBrowser._linkHandler, add_browser_search_link, "before")

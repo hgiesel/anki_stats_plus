@@ -1,6 +1,6 @@
 from typing import List, Any
 
-from aqt import mw
+from aqt import mw, dialogs
 
 from .graphs import get_library
 
@@ -80,3 +80,10 @@ def get_active_overview_graphs() -> List[str]:
 
 def get_active_congrats_graphs() -> List[str]:
     return get_active_graphs(graphs_congrats.value)
+
+
+def add_browser_search_link(self, cmd: str) -> Any:
+    if cmd.startswith("browserSearch"):
+        _, query = cmd.split(":", 1)
+        browser = dialogs.open("Browser", self.mw)
+        browser.search_for(query)

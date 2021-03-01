@@ -1,6 +1,9 @@
-from aqt.gui_hooks import overview_will_render_content
+from anki.hooks import wrap
 
-from .utils import make_graph_js, get_active_overview_graphs
+from aqt.gui_hooks import overview_will_render_content
+from aqt.overview import Overview
+
+from .utils import make_graph_js, get_active_overview_graphs, add_browser_search_link
 
 
 def add_graphs_to_overview(self, content):
@@ -16,3 +19,4 @@ def add_graphs_to_overview(self, content):
 
 def init_overview():
     overview_will_render_content.append(add_graphs_to_overview)
+    Overview._linkHandler = wrap(Overview._linkHandler, add_browser_search_link, "before")
