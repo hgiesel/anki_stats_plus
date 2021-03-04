@@ -3,7 +3,7 @@ from typing import List, Tuple
 from aqt import Qt, QWidget, QListWidget, QListWidgetItem
 
 from .forms.graph_list_ui import Ui_GraphList
-from ..src.graphs import get_display_name
+from ..src.graphs import get_display_name, get_name_from_display_name
 
 
 list_item_flags = (
@@ -14,21 +14,6 @@ list_item_flags = (
     | Qt.ItemIsUserCheckable
     | Qt.ItemNeverHasChildren
 )
-
-
-class GraphListItem(QListWidgetItem):
-    def __init__(self, parent: QListWidget, name: str, enabled: bool):
-        super().__init__(parent)
-
-        self._name = name
-        self.setText(get_display_name(name))
-
-        self.setFlags(self.flags() & list_item_flags)
-        self.setCheckState(Qt.Checked if enabled else Qt.Unchecked)
-
-    def name(self) -> str:
-        return self._name
-
 
 class GraphList(QWidget):
     def __init__(self, parent):
@@ -41,7 +26,11 @@ class GraphList(QWidget):
 
     def setupUi(self, items: List[Tuple[str, bool]]):
         for name, enabled in items:
-            self.ui.list.addItem(GraphListItem(self.ui.list, name, enabled))
+            widget_item = QListWidgetItem(self.ui.list)
+            widget_item.setText(get_display_name(name))
+            widget_item.setFlags(widget_item.flags() & list_item_flags)
+            widget_item.setCheckState(Qt.Checked if enabled else Qt.Unchecked)
+            self.ui.list.addItem(widget_item)
 
     def exportData(self) -> List[Tuple[str, bool]]:
         data = []
@@ -53,7 +42,7 @@ class GraphList(QWidget):
             item = self.ui.list.item(index)
             data.append(
                 [
-                    item.name(),
+                    get_name_from_display_name(item.text()),
                     item.checkState() == Qt.Checked,
                 ]
             )

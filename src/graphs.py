@@ -48,6 +48,18 @@ def get_graph(name: str) -> Optional[Graph]:
     return graph
 
 
+def get_graph_by_display_name(display_name: str) -> Optional[Graph]:
+    available_graphs = get_available_graphs()
+    filtered = filter(lambda graph: graph.display_name == display_name, available_graphs)
+
+    try:
+        graph = next(filtered)
+    except:
+        graph = None
+
+    return graph
+
+
 def get_library(name: str) -> Optional[str]:
     if graph := get_graph(name):
         return graph.library
@@ -58,6 +70,13 @@ def get_library(name: str) -> Optional[str]:
 def get_display_name(name: str) -> Optional[str]:
     if graph := get_graph(name):
         return graph.display_name
+
+    return None
+
+
+def get_name_from_display_name(display_name: str) -> Optional[str]:
+    if graph := get_graph_by_display_name(display_name):
+        return graph.name
 
     return None
 
