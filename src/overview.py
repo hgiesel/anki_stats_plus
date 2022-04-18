@@ -11,7 +11,7 @@ def add_graphs_to_overview(self, content):
 
     content.table += f"""
 <div id="graphsSection"></div>
-<script>try {{ {graph_js} }} catch (e) {{ console.log(e) }}</script>"
+<script>try {{ {graph_js} }} catch (e) {{ console.log(e) }}</script>
 """
 
 
